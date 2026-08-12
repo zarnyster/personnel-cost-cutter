@@ -4,6 +4,7 @@ import { Wizard } from '@/components/Wizard';
 import { MeasuresExplorer } from '@/components/MeasuresExplorer';
 import { MeasureDetailDialog } from '@/components/MeasureDetailDialog';
 import type { Measure } from '@/data/measures';
+import { LOGO_KADRY } from '@/assets/logo';
 import { Compass, Table2 } from 'lucide-react';
 
 export default function Home() {
@@ -13,18 +14,17 @@ export default function Home() {
     <div className="paper">
       {/* header */}
       <header className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 md:px-6 py-10 md:py-14">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[hsl(350_52%_42%)] mb-3">
-            Справочник по Трудовому кодексу РФ
-          </p>
-          <h1 className="font-display text-4xl md:text-5xl leading-[1.05] max-w-3xl">
-            Как сократить расходы на&nbsp;персонал
-          </h1>
-          <p className="mt-4 max-w-2xl text-muted-foreground leading-relaxed">
-            12 законных мер — от неполного рабочего времени до сокращения штата. Подберите подходящую
-            за четыре вопроса или изучите полную сравнительную таблицу: предупреждения, уведомления
-            госорганов и профсоюза, право работника отказаться и ограничения.
-          </p>
+        <div className="mx-auto max-w-6xl px-4 md:px-6 py-8 md:py-10">
+          <div className="flex items-center gap-5 md:gap-7">
+            <img
+              src={LOGO_KADRY}
+              alt="Система Кадры"
+              className="h-12 md:h-16 w-auto shrink-0"
+            />
+            <h1 className="font-display text-3xl md:text-5xl leading-[1.1]">
+              Как сократить расходы на&nbsp;персонал
+            </h1>
+          </div>
         </div>
       </header>
 
