@@ -179,6 +179,20 @@ export function Wizard({ onOpen }: { onOpen: (m: Measure) => void }) {
     );
   }
 
+  const counts = {
+    total: results.length,
+    ok: results.filter((r) => r.score === 0).length,
+    warn: results.filter((r) => r.score >= 1 && r.score <= 2).length,
+    hard: results.filter((r) => r.score >= 3).length,
+  };
+
+  const stats: { value: number; label: string; className: string }[] = [
+    { value: counts.total, label: 'Всего мер', className: 'text-foreground' },
+    { value: counts.ok, label: 'Подходящих', className: 'text-[hsl(100_28%_30%)]' },
+    { value: counts.warn, label: 'С оговорками', className: 'text-[hsl(30_60%_32%)]' },
+    { value: counts.hard, label: 'Сложно применить', className: 'text-[hsl(350_52%_38%)]' },
+  ];
+
   return (
     <div className="mx-auto max-w-3xl">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
@@ -186,14 +200,16 @@ export function Wizard({ onOpen }: { onOpen: (m: Measure) => void }) {
           <span className="text-xs font-semibold uppercase tracking-widest text-[hsl(350_52%_42%)]">
             Результат подбора
           </span>
-          <h2 className="font-display text-3xl md:text-4xl leading-tight mt-1">
-            {results.filter((r) => r.score === 0).length > 0
-              ? `Подходящих мер: ${results.filter((r) => r.score === 0).length}`
-              : 'Идеальных совпадений нет'}
-          </h2>
-          <p className="text-muted-foreground mt-1 text-sm">
-            Меры отсортированы от наиболее подходящей к наименее. Нажмите на меру, чтобы увидеть все условия.
-          </p>
+          <div className="mt-3 flex flex-wrap gap-x-8 gap-y-3">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <div className={'font-display text-4xl leading-none ' + s.className}>{s.value}</div>
+                <div className="text-xs uppercase tracking-wide text-muted-foreground mt-1.5">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <button
           onClick={reset}
@@ -202,6 +218,10 @@ export function Wizard({ onOpen }: { onOpen: (m: Measure) => void }) {
           <RotateCcw className="h-4 w-4" /> Пройти заново
         </button>
       </div>
+
+      <p className="text-sm text-muted-foreground mb-6">
+        Нажмите на меру, чтобы увидеть все условия применения.
+      </p>
 
       <ol className="space-y-3">
         {results.map((r, i) => (
