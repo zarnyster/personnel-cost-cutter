@@ -10,7 +10,7 @@ export default function Home() {
   const [selected, setSelected] = useState<Measure | null>(null);
 
   return (
-    <div className="min-h-screen paper">
+    <div className="paper">
       {/* header */}
       <header className="border-b border-border">
         <div className="mx-auto max-w-6xl px-4 md:px-6 py-10 md:py-14">
